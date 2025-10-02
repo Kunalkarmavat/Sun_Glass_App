@@ -63,7 +63,7 @@ class ProductDetailScreen extends StatelessWidget {
 }
 
 class BottomProductCard extends StatelessWidget {
-  const BottomProductCard({Key? key}) : super(key: key);
+  const BottomProductCard({super.key});
 
   @override
   Widget build(BuildContext context) {

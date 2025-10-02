@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:frames_design/common/product/product.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:frames_design/utils/constants/colors.dart';
 import 'package:frames_design/utils/constants/sizes.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ProductCardVertical extends StatelessWidget {
-  const ProductCardVertical({super.key});
+  final String title;
+  final double price;
+  final String imageUrl;
+
+  const ProductCardVertical({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,83 +22,59 @@ class ProductCardVertical extends StatelessWidget {
       width: 180,
       height: 200,
       decoration: BoxDecoration(
-        color: OkColors.cardBackgroundColor,
-
+        color: Colors.white,
         borderRadius: BorderRadius.circular(OkSizes.md),
       ),
       child: Stack(
         children: [
-          OkRoundedImage(
-            imageUrl: 'assets/images/categories/image1.png',
-            width: double.infinity,
-            height: 212,
-      
-            applyImageRadius: false,
-          ),
-          // Wishlist Icon (smaller width)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 12,
+          Container(
+            alignment: Alignment.center,
+            child:OkRoundedImage(
+              imageUrl: 'assets/images/categories/image1.png',
+              width: double.infinity,
+              height: 140,
+              fit: BoxFit.cover,
+              applyImageRadius: false,
             ),
+          ),
+          
+          Padding(
+            padding: const EdgeInsets.all(12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Hyper",
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
-      
                 IconButton(
-                  
-                      color: OkColors.borderDark,
-                      padding: EdgeInsets.zero,
-                      iconSize: 20,
-                      icon: Icon(Iconsax.heart),
-                      onPressed: () {},
-                    ),
+                  icon: const Icon(Iconsax.heart),
+                  color: OkColors.borderDark,
+                  padding: EdgeInsets.zero,
+                  iconSize: 20,
+                  onPressed: () {},
+                ),
               ],
             ),
           ),
-      
-      
-            Positioned(
-              bottom: 12,
-              left: 12,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                                // Title
-                                          
-                                // Price Row
-                                Text(
-                                  "₹98",
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                          
-                                Text(
-                                  "₹98",
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 28,
-                                    fontFamily: 'Poppins'
-                                    
-                                  ),
-                                  
-                                ),
-                                          
-                                // Free delivery
-                ],
-              ),
+          Positioned(
+            bottom: 12,
+            left: 12,
+            child: Text(
+              '₹${price.toStringAsFixed(2)}',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                  ),
             ),
+          ),
         ],
       ),
     );

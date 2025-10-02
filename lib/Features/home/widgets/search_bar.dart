@@ -1,28 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:frames_design/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:frames_design/utils/constants/sizes.dart';
 
-class SearchBarContainer extends StatelessWidget {
-  const SearchBarContainer({super.key});
+class SearchBarContainer extends StatefulWidget {
+  final Function(String) onSearchChanged;
+
+  const SearchBarContainer({super.key, required this.onSearchChanged});
+
+  @override
+  _SearchBarContainerState createState() => _SearchBarContainerState();
+}
+
+class _SearchBarContainerState extends State<SearchBarContainer> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onChanged(String value) {
+    widget.onSearchChanged(value);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       margin: const EdgeInsets.symmetric(horizontal: OkSizes.defaultSpace),
-      padding: const EdgeInsets.symmetric(vertical: OkSizes.xs,horizontal: OkSizes.sm),
-
-      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(vertical: OkSizes.xs, horizontal: OkSizes.sm),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24), // optional for rounded edges
+        borderRadius: BorderRadius.circular(24),
       ),
       child: TextField(
+        controller: _controller,
+        textAlign: TextAlign.center,
         decoration: InputDecoration(
           hintText: "Search products...",
-          prefixIcon: Icon(Iconsax.search_normal, ),
-          border: InputBorder.none, // 
+          prefixIcon: const Icon(Iconsax.search_normal),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 12),
         ),
+        onChanged: _onChanged,
       ),
     );
   }
