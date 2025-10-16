@@ -1,16 +1,7 @@
-# frames_design
+Hello Connections! 👋
+As a Flutter developer, I often focus more on functionality—but recently, I wanted to sharpen my UI/UX skills. So, I recreated an e-commerce app UI in Flutter inspired by a beautiful Dribbble design by Nixtio.
 
-A new Flutter project.
+Dribble design—
+https://lnkd.in/g7TGKJss
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I'm looking for a place where I can grow as a developer who values both code and UI. Feedback is welcome!
