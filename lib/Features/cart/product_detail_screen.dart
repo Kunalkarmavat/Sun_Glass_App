@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frames_design/common/product/product.dart';
+import 'package:frames_design/utils/constants/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
@@ -7,7 +9,7 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 238, 241, 238),
+      backgroundColor: const Color(0xFFE7EAE7),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -15,11 +17,17 @@ class ProductDetailScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        title: const Text(
+        title: Text(
           'Choose Your Color',
-          style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+          style: GoogleFonts.montserrat(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
         ),
         actions: [
           IconButton(
@@ -30,7 +38,7 @@ class ProductDetailScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Main scrollable content (add your desired widgets here)
+          // Main scrollable content
           SingleChildScrollView(
             child: Column(
               children: [
@@ -38,23 +46,19 @@ class ProductDetailScreen extends StatelessWidget {
                 Center(
                   child: OkRoundedImage(
                     imageUrl: 'assets/images/categories/ProductImg.png',
-                    height: 470,
-                    
+                    height: 482,
                     applyImageRadius: false,
                   ),
                 ),
                 const SizedBox(height: 8),
-                // ... add thumbnails or any other content here ...
               ],
             ),
           ),
+
           // Bottom Floating Product Card
           const Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 15), // Outer padding from device edge
-              child: BottomProductCard(),
-            ),
+            child: BottomProductCard(),
           ),
         ],
       ),
@@ -68,12 +72,13 @@ class BottomProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
         ),
         padding: const EdgeInsets.fromLTRB(24, 26, 24, 22),
         width: double.infinity,
@@ -89,30 +94,31 @@ class BottomProductCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Eclipse V2',
-                        style: TextStyle(
+                        style: GoogleFonts.montserrat(
                           fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          fontWeight: FontWeight.w800,
+                          color: const Color(0xFF112616),
                         ),
                       ),
                       Row(
                         children: [
-                          const Text(
+                          Text(
                             '\$165.00',
-                            style: TextStyle(
-                              fontSize: 27,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF112616),
+                            style: GoogleFonts.montserrat(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: const Color(0xFF112616),
                             ),
                           ),
                           const SizedBox(width: 8),
-                          const Text(
+                          Text(
                             '\$200.00',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                            style: GoogleFonts.montserrat(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xFF112616),
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
@@ -122,9 +128,12 @@ class BottomProductCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
-                    color: Color(0xFFE7EAE6),
+                    color: const Color(0xFFE7EAE6),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Text(
@@ -138,34 +147,55 @@ class BottomProductCard extends StatelessWidget {
                 ),
               ],
             ),
+
             const SizedBox(height: 18),
-            // Info row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _InfoColumn(label: "Height:", value: "4 cm"),
-                _InfoColumn(label: "Width:", value: "15 cm"),
-                _InfoColumn(label: "Material:", value: "Glass", valueColor: Color(0xFF112616)),
-              ],
+
+            // Info row (fixed)
+            SizedBox(
+              height: 50, // Ensures VerticalDivider is visible
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  _InfoColumn(label: "Height:", value: "4 cm"),
+                  VerticalDivider(
+                    color: OkColors.darkGrey,
+                    thickness: 2,
+                    width: 20,
+                  ),
+                  _InfoColumn(label: "Width:", value: "15 cm"),
+                  VerticalDivider(
+                    color: OkColors.darkGrey,
+                    thickness: 2,
+                    width: 20,
+                  ),
+                  _InfoColumn(
+                    label: "Material:",
+                    value: "Glass",
+                    valueColor: Color(0xFF112616),
+                  ),
+                ],
+              ),
             ),
+
             const SizedBox(height: 22),
+
             // Add to Cart Button
             SizedBox(
+              height: 48,
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF253C28),
+                  backgroundColor: const Color(0xFF253C28),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(22),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 17),
                 ),
                 onPressed: () {},
-                child: const Text(
+                child: Text(
                   'Add to Cart',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
                 ),
@@ -178,30 +208,32 @@ class BottomProductCard extends StatelessWidget {
   }
 }
 
-// Helper widget for the info columns
+// Helper widget for info columns
 class _InfoColumn extends StatelessWidget {
   final String label, value;
   final Color? valueColor;
 
-  const _InfoColumn({required this.label, required this.value, this.valueColor});
+  const _InfoColumn({
+    required this.label,
+    required this.value,
+    this.valueColor,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(label, style: TextStyle(color: Colors.grey, fontSize: 16)),
-          const SizedBox(height: 3),
-          Text(
-            value,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: valueColor ?? Colors.black,
-              fontSize: 16,
-            ),
+    return Column(
+      children: [
+        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 16)),
+        const SizedBox(height: 3),
+        Text(
+          value,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: valueColor ?? Colors.black,
+            fontSize: 16,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

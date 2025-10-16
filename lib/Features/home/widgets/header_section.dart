@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:frames_design/utils/constants/colors.dart';
 import 'package:frames_design/utils/constants/sizes.dart';
 import 'package:frames_design/provider/product_provider.dart';
 
@@ -21,31 +21,30 @@ class HeaderSection extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 6),
                 child: Text(
                   '16',
-                  style: TextStyle(
-                    fontFamily: 'Sora',
+                  style: GoogleFonts.poppins(
                     height: 0.9,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.bold,
                     fontSize: 80,
-                    letterSpacing: -12,
-                    color: OkColors.textPrimary,
+                    letterSpacing: 2,
+                    color: Color(0xFF112616),
                   ),
                 ),
               ),
               const SizedBox(width: 8),
               Text(
                 'New \nArrivals',
-                style: TextStyle(
-                  fontFamily: 'Sora',
-                  height: 1,
+                style: GoogleFonts.poppins(
+                 height: 1,
                   fontWeight: FontWeight.bold,
                   fontSize: 36,
-                  color: OkColors.textPrimary,
+                  color: Color(0xFF112616),
                 ),
               ),
             ],
           ),
           GestureDetector(
             onTap: () {
+
               double selectedMaxPrice = Provider.of<ProductProvider>(context, listen: false).maxPrice;
               showDialog(
                 context: context,
@@ -59,6 +58,8 @@ class HeaderSection extends StatelessWidget {
                         children: [
                           Text('Max Price: ₹${tempPrice.toStringAsFixed(0)}'),
                           Slider(
+                            thumbColor: Color(0xFF1C4322),
+                            activeColor: Color(0xFF1C4322),
                             min: 0,
                             max: 500,
                             divisions: 50,
@@ -78,32 +79,35 @@ class HeaderSection extends StatelessWidget {
                             Provider.of<ProductProvider>(context, listen: false).clearFilter();
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Clear Filter'),
+                          child:  Text('Clear Filter'
+                          ,style: GoogleFonts.montserrat(color: Color(0xFF1C4322),
+                          
+                          fontWeight: FontWeight.w500),
+                          ),
                         ),
                         TextButton(
                           onPressed: () {
                             Provider.of<ProductProvider>(context, listen: false).filterByMaxPrice(tempPrice);
                             Navigator.of(context).pop();
                           },
-                          child: const Text('Apply'),
+                           child:  Text('Apply'
+                          ,style: GoogleFonts.montserrat(color: Color(0xFF1C4322),
+                          
+                          fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ],
                     ),
                   );
                 },
               );
+
             },
             child: Container(
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 4,
-                    offset: Offset(2, 2),
-                  ),
-                ],
+               
               ),
               padding: const EdgeInsets.all(8),
               child: const Icon(

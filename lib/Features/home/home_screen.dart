@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frames_design/navigation_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:frames_design/features/home/widgets/header_section.dart';
 import 'package:frames_design/features/home/widgets/search_bar.dart';
@@ -15,19 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> categoryImageList = [
-    'assets/images/categories/image1.png',
-    'assets/images/categories/image2.png',
-    'assets/images/categories/image3.png',
-    'assets/images/categories/image4.png',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<ProductProvider>(context, listen: false).fetchProducts();
-  }
-
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -40,33 +28,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: OkDeviceUtils.getAppBarHeight()),
+                    // Header Section
                     const HeaderSection(),
                     SizedBox(height: OkSizes.spaceBtwSections),
+                    
+                    // Search Bar
                     SearchBarContainer(
                       onSearchChanged: (searchTerm) {
-                        Provider.of<ProductProvider>(context, listen: false).filterBySearchTerm(searchTerm);
+                        productProvider.filterBySearchTerm(searchTerm);
                       },
                     ),
-                    SizedBox(height: OkSizes.spaceBtwSections),
+
+                    SizedBox(height: OkSizes.spaceBtwItems),
+
+                    // Product Grid
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: OkSizes.defaultSpace),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: OkSizes.defaultSpace),
                       child: GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(8),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
+                          mainAxisSpacing: 20,
                           childAspectRatio: 0.75,
                         ),
                         itemCount: productProvider.filteredProducts.length,
                         itemBuilder: (context, index) {
-                          final product = productProvider.filteredProducts[index];
+                          final product =
+                              productProvider.filteredProducts[index];
                           return ProductCardVertical(
-                            title: product.title,
-                            price: product.price,
-                            imageUrl: categoryImageList[index % categoryImageList.length],
+                            product: product, // Pass the full product object
                           );
                         },
                       ),
@@ -74,6 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+
+          
       ),
     );
   }

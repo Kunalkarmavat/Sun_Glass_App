@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frames_design/Features/home/home_screen.dart';
 import 'package:frames_design/utils/constants/colors.dart';
-import 'package:frames_design/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-
-
+import 'package:google_fonts/google_fonts.dart';
 
 class NavigationMenu extends StatelessWidget {
   const NavigationMenu({super.key});
@@ -19,14 +16,14 @@ class NavigationMenu extends StatelessWidget {
         () => Container(
           decoration: const BoxDecoration(
             border: Border(
-              top: BorderSide(color: Colors.grey, width: 0.5), // 🔹 top border
+              top: BorderSide(color: Colors.grey, width: 0.5),
             ),
           ),
           child: NavigationBarTheme(
             data: NavigationBarThemeData(
               labelTextStyle: WidgetStateProperty.all(
                 const TextStyle(
-                  fontSize: 10,   // 🔹 decreased label font size
+                  fontSize: 10,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -34,32 +31,46 @@ class NavigationMenu extends StatelessWidget {
             child: NavigationBar(
               backgroundColor: OkColors.white,
               indicatorColor: OkColors.softGrey,
+              indicatorShape: RoundedRectangleBorder(
+
+                borderRadius: BorderRadius.circular(10),
+              ),
+              maintainBottomViewPadding: true,
               height: 70,
-              elevation: 0, 
+              elevation: 0,
               selectedIndex: controller.selectedIndex.value,
               onDestinationSelected: (int index) {
                 controller.selectedIndex.value = index;
               },
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Iconsax.menu, size: OkSizes.iconMd),
+              destinations: [
+                const NavigationDestination(
+                  icon: Icon(Icons.drag_indicator, size: 28),
                   label: 'Menu',
                 ),
-               
-                Center(
-                  child: Text(
-                                'Luxora',
-                                style: TextStyle(
-                  fontFamily: 'Sora',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Color(0xFF1C4322),
-                                ),
-                              ),
-                ),
                 NavigationDestination(
-                  icon: Icon(Iconsax.shopping_bag, size: OkSizes.iconMd),
-                  label: 'Account',
+                  
+                  icon: Text(
+                    'Luxora',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF112616),
+                    ),
+                  ),
+                  selectedIcon: Text(
+                    'Luxora',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: OkColors.textPrimary,
+                    ),
+                  ),
+                  label: '',
+                ),
+                const NavigationDestination(
+                  
+                  icon: Icon(Icons.shopping_bag_outlined, size: 28),
+                  label: 'Cart',
                 ),
               ],
             ),
@@ -75,10 +86,8 @@ class NavigationController extends GetxController {
   final RxInt selectedIndex = 0.obs;
 
   final screens = [
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    // Container(color: Colors.blue),
-    // Container(color: Colors.green),
+    const HomeScreen(),
+    const HomeScreen(),
+    const HomeScreen(),
   ];
 }
