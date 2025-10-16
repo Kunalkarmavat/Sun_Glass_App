@@ -4,4 +4,4 @@ As a Flutter developer, I often focus more on functionality—but recently, I wa
 Dribble design—
 https://lnkd.in/g7TGKJss
 
-I'm looking for a place where I can grow as a developer who values both code and UI. Feedback is welcome!
+I'm looking for a place where I can grow.
