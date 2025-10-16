@@ -8,6 +8,7 @@ class SearchBarContainer extends StatefulWidget {
   const SearchBarContainer({super.key, required this.onSearchChanged});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SearchBarContainerState createState() => _SearchBarContainerState();
 }
 
@@ -34,13 +35,16 @@ class _SearchBarContainerState extends State<SearchBarContainer> {
         borderRadius: BorderRadius.circular(24),
       ),
       child: TextField(
+      
         controller: _controller,
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.left,
         decoration: InputDecoration(
           hintText: "Search products...",
-          prefixIcon: const Icon(Iconsax.search_normal),
+          prefixIcon: const Icon(Iconsax.search_normal,
+          color:Colors.grey ,
+          ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(vertical: 12),
+          contentPadding: EdgeInsets.symmetric(vertical: 14),
         ),
         onChanged: _onChanged,
       ),
